@@ -1,0 +1,11 @@
+.DS_Store
+*.xcbkptlist
+Breakpoints_v2.xcbkptlist
+*.xcuserstate
+UserInterfaceState.xcuserstate
+*.xcuserdatad
+Pods
+package-lock.json
+reports/node_modules
+node_modules
+Gemfile.lock

@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Swifterviewing
 //
-//  Created by thompsty on 7/9/20.
+//  Created by Tyler Thompson on 7/9/20.
 //  Copyright © 2020 World Wide Technology Application Services. All rights reserved.
 //
 

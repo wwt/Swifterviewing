@@ -14,6 +14,8 @@
 		CA7A916E24B774F600419A0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7A916D24B774F600419A0F /* Assets.xcassets */; };
 		CA7A917124B774F600419A0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA7A916F24B774F600419A0F /* LaunchScreen.storyboard */; };
 		CA7A917C24B774F600419A0F /* SwifterviewingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7A917B24B774F600419A0F /* SwifterviewingTests.swift */; };
+		CA7A918724B776FB00419A0F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7A918624B776FB00419A0F /* API.swift */; };
+		CA7A918924B7D67E00419A0F /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7A918824B7D67E00419A0F /* Album.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		CA7A917724B774F600419A0F /* SwifterviewingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwifterviewingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7A917B24B774F600419A0F /* SwifterviewingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifterviewingTests.swift; sourceTree = "<group>"; };
 		CA7A917D24B774F600419A0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA7A918624B776FB00419A0F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		CA7A918824B7D67E00419A0F /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				CA7A916D24B774F600419A0F /* Assets.xcassets */,
 				CA7A916F24B774F600419A0F /* LaunchScreen.storyboard */,
 				CA7A917224B774F600419A0F /* Info.plist */,
+				CA7A918624B776FB00419A0F /* API.swift */,
+				CA7A918824B7D67E00419A0F /* Album.swift */,
 			);
 			path = Swifterviewing;
 			sourceTree = "<group>";
@@ -202,7 +208,9 @@
 			files = (
 				CA7A916924B774F500419A0F /* ViewController.swift in Sources */,
 				CA7A916524B774F500419A0F /* AppDelegate.swift in Sources */,
+				CA7A918724B776FB00419A0F /* API.swift in Sources */,
 				CA7A916724B774F500419A0F /* SceneDelegate.swift in Sources */,
+				CA7A918924B7D67E00419A0F /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
