@@ -5,6 +5,9 @@ If you're applying for an iOS development position at World Wide Technology Appl
 ### Instructions
 Your mission, should you choose to accept it, is to show an album title and image in a table view. The album title and image can be retrieved from [https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/). The project already contains a base URL (the one above!) and endpoint URLs for this task.
 
+BUSINESS REQUIREMENTS:
+- Remove all occurances of the letter "e" (case-insensitive) from album titles
+
 You are free to change *anything* about the current code so long as you accomplish this goal. Make it read and function the way you want it to.
 
 NOTE: The code in its current state does not compile, that's on purpose because there's editor placeholder in there.
