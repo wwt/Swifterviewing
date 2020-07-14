@@ -3,7 +3,7 @@
 If you're applying for an iOS development position at World Wide Technology Application Services then this is the repo for you!
 
 ### Instructions
-Your mission, should you choose to accept it, is to show an album title and image in a table view. The album title and image can be retrieved from [https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/). The project already contains a base URL (the one above!) and endpoint URLs for this task.
+Your mission, should you choose to accept it, is to show an album title and image in a table view. The album title and image should be retrieved from [https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/). The project already contains a base URL (the one above!) and endpoint URLs for this task.
 
 BUSINESS REQUIREMENTS:
 - Remove all occurances of the letter "e" (case-insensitive) from album titles
@@ -17,12 +17,6 @@ NOTE: The code in its current state does not compile, that's on purpose because 
   <summary>Q:  What if I want to use SwiftUI/Combine?</summary>
 
   A: Do it! You can change **anything** about the current code so long as you accomplish the overall goal, show the album title, and image, in a List/Collection/TableView
-</details>
-
-<details>
-  <summary>Q:  Can I do something else instead?</summary>
-
-  A: Of course! Just make sure that whatever project you submit showcases enough code that we can see how you approach problems. Server interactions are not required, but are helpful to see.
 </details>
 
 <details>
