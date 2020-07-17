@@ -8,7 +8,7 @@ Your mission, should you choose to accept it, is to show an album title and imag
 BUSINESS REQUIREMENTS:
 - Remove all occurances of the letter "e" (case-insensitive) from album titles
 
-You are free to change *anything* about the current code so long as you accomplish this goal. Make it read and function the way you want it to.
+You are free to change *anything* about the current code so long as you accomplish this goal. Make it read and function the way you want it to, but bear in mind we’re looking for people who understand what best industry practices look like in Swift.
 
 NOTE: The code in its current state does not compile, that's on purpose because there's editor placeholder in there.
 
