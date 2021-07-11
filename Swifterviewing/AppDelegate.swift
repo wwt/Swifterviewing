@@ -7,14 +7,29 @@
 //
 
 import UIKit
-
+import TrustKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Enable SSL pinning
+        /*DispatchQueue.main.async {
+            let trustKitConfig = [
+                kTSKSwizzleNetworkDelegates: false,
+                kTSKPinnedDomains: [
+                    API.baseURL: [
+                        kTSKEnforcePinning: true,
+                        kTSKIncludeSubdomains: true,
+                        kTSKPublicKeyHashes: ["j+Na6n1IvPmQOScnte/ALM+8lEvITIeJxzhcz/IsK70=",
+                                              "YZPgTZ+woNCCCIW3LH2CxQeLzB/1m42QcCTBSdgayjs=",
+                                              "iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="]
+                    ]
+                ]
+                ] as [String: Any]
+            TrustKit.initSharedInstance(withConfiguration: trustKitConfig)
+        }*/
+        
         return true
     }
 
