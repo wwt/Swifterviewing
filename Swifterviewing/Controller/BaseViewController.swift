@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
         let loadingIndicator = UIActivityIndicatorView()
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = .large
-        loadingIndicator.color = .blue
+        loadingIndicator.color = .white
         loadingIndicator.center = overlay.center
         loadingIndicator.startAnimating()
         self.currentOverlay = overlay
