@@ -8,6 +8,8 @@
 
 import Foundation
 
-<#ClassOrStruct#> Album {
-    
+struct Album: Decodable {
+    var userId: Int
+    var id: Int
+    var title: String?
 }
