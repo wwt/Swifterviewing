@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-<#ClassOrStruct#> Album {
-    
+struct Album {
+    let image: UIImage
+    let label: String
 }

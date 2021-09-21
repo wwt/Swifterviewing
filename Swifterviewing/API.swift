@@ -8,7 +8,7 @@
 
 import Foundation
 
-<#ClassOrStruct#> API {
+struct API {
     let baseURL = "https://jsonplaceholder.typicode.com/"
     let photosEndpoint = "/photos" //returns photos and their album ID
     let albumsEndpoint = "/albums" //returns an album, but without photos
@@ -19,6 +19,6 @@ import Foundation
 
 extension API {
     enum AlbumError: Error {
-        case <#SomeRealisticErrorThing#>
+        case URLResultError
     }
 }
