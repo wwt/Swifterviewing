@@ -9,21 +9,21 @@
 import Foundation
 import Combine
 
-protocol AlbumViewModelDelegate: AnyObject {
+protocol ListViewModelDelegate: AnyObject {
     func onUpdate()
 }
 
 final class AlbumViewModel {
     
     var albums: [Album] = []
-    weak var delegate: AlbumViewModelDelegate?
+    weak var delegate: ListViewModelDelegate?
     
     private var bindings = Set<AnyCancellable>()
 
     // MARK: - private vars
     private var api: API = API()
     private var start = 0
-    private var limit = 5
+    private var limit = 100
 
     init(){
         fetchAlbums()

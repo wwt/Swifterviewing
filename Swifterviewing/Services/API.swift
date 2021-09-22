@@ -47,8 +47,8 @@ enum Endpoint {
                 URLQueryItem(name: "_limit", value: String(limit))
             ]
             break
-        case .photos(let _):
-            // TODO: setup code
+        case .photos(let id):
+            components.path = "/albums/" + String(id) + "/photos"
             break
         }
         

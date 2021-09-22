@@ -9,7 +9,7 @@
 import UIKit
 
 // TODO: remember to remove 'e'
-class AlbumCell: UICollectionViewCell {
+class PhotoCell: UICollectionViewCell {
     
     let vStack: UIStackView = {
         let vStack = UIStackView()
@@ -19,16 +19,17 @@ class AlbumCell: UICollectionViewCell {
         return vStack
     }()
     
-    let albumLabel: UILabel = {
+    let photoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.textColor = .brown
+        label.textAlignment = .center
         return label
     }()
         
-    let albumImageView: UIImageView = {
+    let photoImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()    
@@ -43,8 +44,8 @@ class AlbumCell: UICollectionViewCell {
     }
 
     private func setup(){
-        vStack.addArrangedSubview(albumImageView)
-        vStack.addArrangedSubview(albumLabel)
+        vStack.addArrangedSubview(photoImageView)
+        vStack.addArrangedSubview(photoLabel)
         addSubview(vStack)
         
         let guide = contentView.safeAreaLayoutGuide
@@ -57,10 +58,10 @@ class AlbumCell: UICollectionViewCell {
         
     }
     
-    func setCell(_ album: Album){
+    func setCell(_ photo: Photo){
 //        albumImageView.image = album.image
-        albumLabel.text = album.title
-        backgroundColor = .cyan
+        photoLabel.text = photo.title
+        backgroundColor = .green
     }
     
 }
