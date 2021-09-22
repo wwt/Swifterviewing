@@ -15,12 +15,15 @@ class AlbumCell: UICollectionViewCell {
         let vStack = UIStackView()
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
+        vStack.alignment = .fill
         return vStack
     }()
     
     let albumLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
+        label.textColor = .brown
         return label
     }()
         
@@ -40,14 +43,24 @@ class AlbumCell: UICollectionViewCell {
     }
 
     private func setup(){
-        albumImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        vStack.addSubview(albumImageView)
-        vStack.addSubview(albumLabel)
+        vStack.addArrangedSubview(albumImageView)
+        vStack.addArrangedSubview(albumLabel)
+        addSubview(vStack)
+        
+        let guide = contentView.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            vStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 8),
+            vStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -8),
+            vStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 8),
+            vStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8),
+        ])
+        
     }
     
     func setCell(_ album: Album){
-        albumImageView.image = album.image
-        albumLabel.text = album.label
+//        albumImageView.image = album.image
+        albumLabel.text = album.title
+        backgroundColor = .cyan
     }
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Album {
-    let image: UIImage
-    let label: String
+struct Album: Codable, Hashable {
+    var id: Int
+    var title: String
 }

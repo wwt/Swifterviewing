@@ -7,28 +7,32 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
+
+    private let albumVM = AlbumViewModel()
+    private var collectionView: UICollectionView?
+    private var datasource: UICollectionViewDiffableDataSource<Int, Album>?
     
-    let albumVM = AlbumViewModel()
-    var collectionView: UICollectionView?
-        
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Album sans e"
         setup()
+        setupDatasource()
     }
-    
+}
+
+// MARK: - helper function
+extension ViewController {
     private func setup() {
+        title = "Album sans e"
+        albumVM.delegate = self
         
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        let layout = getLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .blue
         
         let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -39,26 +43,35 @@ class ViewController: UIViewController {
         ])
         
         collectionView.delegate = self
-        collectionView.dataSource = self
 
         self.collectionView = collectionView
     }
     
-}
+    private func getLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let idealItemRect = CGSize(width: 166, height: 216)
+        let idealWidth = idealItemRect.width + 32
+        let screenWidth = view.safeAreaLayoutGuide.layoutFrame.width
+        let scale = screenWidth/idealWidth
 
-extension ViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        albumVM.albums.count
+        layout.itemSize = CGSize(width: idealItemRect.width*scale/2, height: idealItemRect.height*scale/2)
+        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        return layout
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let album = albumVM.albums[indexPath.item]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? AlbumCell {
-            cell.setCell(album)
-            return cell
+    func setupDatasource(){
+        guard let collectionView = collectionView else { return }
+        collectionView.register(AlbumCell.self, forCellWithReuseIdentifier: "AlbumCell")
+        datasource = UICollectionViewDiffableDataSource<Int, Album>(
+            collectionView: collectionView
+        ){ (collectionView, indexPath, album) in
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as? AlbumCell {
+                cell.setCell(album)
+                return cell
+            }
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
-    }
+    }    
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
@@ -67,6 +80,14 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension ViewController: AlbumViewModelDelegate {
+    func onUpdate() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Album>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(albumVM.albums)
+        datasource?.apply(snapshot, animatingDifferences: true)
+    }
+}
 
 //extension ViewController: UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

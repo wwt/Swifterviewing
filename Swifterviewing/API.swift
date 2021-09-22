@@ -7,18 +7,59 @@
 //
 
 import Foundation
+import Combine
 
 struct API {
-    let baseURL = "https://jsonplaceholder.typicode.com/"
-    let photosEndpoint = "/photos" //returns photos and their album ID
-    let albumsEndpoint = "/albums" //returns an album, but without photos
-    
-    func getAlbums(callback: (Result<Album, AlbumError>) -> Void) {
+    func getSessionPublisher(_ endpoint: Endpoint ) -> Publishers.TryMap<URLSession.DataTaskPublisher, Data>? {
+        guard let url = endpoint.getComponenets() else { return nil }
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .tryMap() { element -> Data in
+                guard let httpResponse = element.response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 else {
+                        throw URLError(.badServerResponse)
+                    }
+                
+                return element.data
+            }
     }
 }
 
-extension API {
-    enum AlbumError: Error {
-        case URLResultError
+enum Endpoint {
+    case albums(Int, Int)
+    case photos(Int)
+    
+    static let host = "https://jsonplaceholder.typicode.com"
+    static let photosEndpoint = "/photos" //returns photos and their album ID
+    static let albumsEndpoint = "/albums" //returns an album, but without photos
+    
+    func getComponenets() -> URL? {
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "jsonplaceholder.typicode.com"
+        
+        switch self {
+        case .albums(let start, let limit):
+            components.path = "/albums"
+            components.queryItems = [
+                URLQueryItem(name: "_start", value: String(start)),
+                URLQueryItem(name: "_limit", value: String(limit))
+            ]
+            break
+        case .photos(let _):
+            // TODO: setup code
+            break
+        }
+        
+        return components.url
     }
 }
+
+
+// TODO: error handling!!
+//extension API {
+//    enum AlbumError: Error {
+//        case URLResultError
+//    }
+//}

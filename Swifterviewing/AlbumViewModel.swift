@@ -7,7 +7,44 @@
 //
 
 import Foundation
+import Combine
 
-struct AlbumViewModel {
+protocol AlbumViewModelDelegate: AnyObject {
+    func onUpdate()
+}
+
+final class AlbumViewModel {
+    
     var albums: [Album] = []
+    weak var delegate: AlbumViewModelDelegate?
+    
+    private var bindings = Set<AnyCancellable>()
+
+    // MARK: - private vars
+    private var api: API = API()
+    private var start = 0
+    private var limit = 5
+
+    init(){
+        fetchAlbums()
+    }
+    
+    // MARK: - helper method
+    private func fetchAlbums(){
+        api.getSessionPublisher(.albums(start, limit))?
+            .decode(type: [Album].self, decoder: JSONDecoder())
+            .replaceError(with: [])
+            .sink(
+                receiveCompletion: { print($0) },
+                receiveValue: {[weak self] in
+                    self?.albums.append(contentsOf: $0)
+                    DispatchQueue.main.sync {
+                        self?.delegate?.onUpdate()
+                    }
+                }
+            )
+            .store(in: &bindings)
+
+        start += limit
+    }
 }
