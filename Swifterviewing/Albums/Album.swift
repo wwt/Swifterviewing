@@ -9,7 +9,22 @@
 import Foundation
 import UIKit
 
-struct Album: Codable, Hashable {
+struct Album: Decodable, Hashable {
+    enum CodingKeys: String, CodingKey {
+        case id, title
+    }
+    
     var id: Int
     var title: String
+    
+    init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(Int.self, forKey: .id)
+            title = try container.decode(String.self, forKey: .title).removeE()
+        } catch {
+            throw APIError.DecodingError
+        }
+        
+    }
 }

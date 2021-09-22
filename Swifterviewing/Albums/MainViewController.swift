@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     private let albumVM = AlbumViewModel()
     private var collectionView: UICollectionView?
@@ -24,9 +24,9 @@ class ViewController: UIViewController {
 }
 
 // MARK: - helper function
-extension ViewController {
+extension MainViewController {
     private func setup() {
-        title = "Album sans e"
+        title = "The Big E"
         navigationController?.view.backgroundColor = .systemBackground
         albumVM.delegate = self
         
@@ -61,7 +61,7 @@ extension ViewController {
     }    
 }
 
-extension ViewController: ListViewModelDelegate {
+extension MainViewController: ListViewModelDelegate {
     func onUpdate() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Album>()
         snapshot.appendSections([0])
@@ -70,7 +70,7 @@ extension ViewController: ListViewModelDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let album = albumVM.albums[indexPath.row]
         let albumVC = AlbumViewController()

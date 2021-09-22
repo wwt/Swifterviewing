@@ -56,10 +56,7 @@ enum Endpoint {
     }
 }
 
-
-// TODO: error handling!!
-//extension API {
-//    enum AlbumError: Error {
-//        case URLResultError
-//    }
-//}
+enum APIError: Error {
+    case URLResultError
+    case DecodingError
+}

@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.windowScene = sceneWindow
 
         let navC = UINavigationController()
-        let vc = ViewController()
+        let vc = MainViewController()
         navC.pushViewController(vc, animated: false)
 
         self.window?.rootViewController = navC
