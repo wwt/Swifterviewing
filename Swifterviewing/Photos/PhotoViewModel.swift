@@ -18,7 +18,7 @@ class PhotoViewModel {
     
     // MARK: - private vars
     private var bindings = Set<AnyCancellable>()
-    private var api: API = API()
+    private var api: API = API<Photo>()
     private var start = 0
     private var limit = 100
     
@@ -29,20 +29,17 @@ class PhotoViewModel {
     
     // MARK: - helper method
     private func fetchPhotos(){
-        api.getSessionPublisher(.photos(albumId))?
-            .decode(type: [Photo].self, decoder: JSONDecoder())
-            .replaceError(with: [])
-            .sink(
-                receiveCompletion: { print($0) },
-                receiveValue: {[weak self] in
-                    self?.photos.append(contentsOf: $0)
-                    DispatchQueue.main.sync {
-                        self?.delegate?.onUpdate()
-                    }
-                }
-            )
-            .store(in: &bindings)
-
+        api.getSessionPublisher(
+            .photos(albumId),
+            bindings: &bindings
+        ) { [weak self] in
+            let photos = $0 as [Photo]
+            self?.photos.append(contentsOf: photos)
+            DispatchQueue.main.sync {
+                self?.delegate?.onUpdate()
+            }
+        }
+          
         start += limit
     }
 

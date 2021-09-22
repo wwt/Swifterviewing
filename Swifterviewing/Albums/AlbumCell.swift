@@ -9,15 +9,6 @@
 import UIKit
 
 class AlbumCell: UITableViewCell {
-    let hStack: UIStackView = {
-        let hStack = UIStackView()
-        hStack.translatesAutoresizingMaskIntoConstraints = false
-        hStack.spacing = 8
-        hStack.axis = .horizontal
-        hStack.alignment = .fill
-        return hStack
-    }()
-    
     let albumLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +34,11 @@ class AlbumCell: UITableViewCell {
     }
     
     private func setup(){
+        let hStack = UIStackView()
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        hStack.spacing = 8
+        hStack.axis = .horizontal
+        hStack.alignment = .fill
         hStack.addArrangedSubview(albumImageView)
         hStack.addArrangedSubview(albumLabel)
         addSubview(hStack)

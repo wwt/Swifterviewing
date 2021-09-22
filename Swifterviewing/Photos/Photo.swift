@@ -11,4 +11,5 @@ import Foundation
 struct Photo: Codable, Hashable {
     var id: Int
     var title: String
+    var thumbnailUrl: String
 }

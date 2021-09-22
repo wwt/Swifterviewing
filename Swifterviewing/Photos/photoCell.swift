@@ -10,15 +10,6 @@ import UIKit
 
 // TODO: remember to remove 'e'
 class PhotoCell: UICollectionViewCell {
-    
-    let vStack: UIStackView = {
-        let vStack = UIStackView()
-        vStack.translatesAutoresizingMaskIntoConstraints = false
-        vStack.axis = .vertical
-        vStack.alignment = .fill
-        return vStack
-    }()
-    
     let photoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,8 +20,8 @@ class PhotoCell: UICollectionViewCell {
         
     let photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .gray
         return imageView
     }()    
     
@@ -44,6 +35,10 @@ class PhotoCell: UICollectionViewCell {
     }
 
     private func setup(){
+        let vStack = UIStackView()
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        vStack.axis = .vertical
+        vStack.alignment = .fill
         vStack.addArrangedSubview(photoImageView)
         vStack.addArrangedSubview(photoLabel)
         addSubview(vStack)

@@ -21,7 +21,7 @@ final class AlbumViewModel {
     private var bindings = Set<AnyCancellable>()
 
     // MARK: - private vars
-    private var api: API = API()
+    private var api: API = API<Album>()
     private var start = 0
     private var limit = 100
 
@@ -31,20 +31,17 @@ final class AlbumViewModel {
     
     // MARK: - helper method
     private func fetchAlbums(){
-        api.getSessionPublisher(.albums(start, limit))?
-            .decode(type: [Album].self, decoder: JSONDecoder())
-            .replaceError(with: [])
-            .sink(
-                receiveCompletion: { print($0) },
-                receiveValue: {[weak self] in
-                    self?.albums.append(contentsOf: $0)
-                    DispatchQueue.main.sync {
-                        self?.delegate?.onUpdate()
-                    }
-                }
-            )
-            .store(in: &bindings)
-
+        api.getSessionPublisher(
+            .albums(start, limit),
+            bindings: &bindings
+        ) { [weak self] in
+            self?.albums.append(contentsOf: $0)
+            DispatchQueue.main.sync {
+                self?.delegate?.onUpdate()
+            }
+        }
+        
+    
         start += limit
     }
 }
