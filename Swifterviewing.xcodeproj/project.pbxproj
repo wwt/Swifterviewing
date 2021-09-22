@@ -79,9 +79,9 @@
 		296DB66E26FB830900ADA0CA /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				2937B74626F973E200EF7DD0 /* photoCell.swift */,
 				296DB66A26FB825D00ADA0CA /* AlbumViewController.swift */,
 				296DB66C26FB82E500ADA0CA /* PhotoViewModel.swift */,
+				2937B74626F973E200EF7DD0 /* photoCell.swift */,
 				296DB67126FB84B800ADA0CA /* Photo.swift */,
 			);
 			path = Photos;
@@ -90,10 +90,10 @@
 		296DB66F26FB831E00ADA0CA /* Albums */ = {
 			isa = PBXGroup;
 			children = (
-				2937B74426F9728D00EF7DD0 /* AlbumViewModel.swift */,
-				CA7A918824B7D67E00419A0F /* Album.swift */,
 				CA7A916824B774F500419A0F /* MainViewController.swift */,
+				2937B74426F9728D00EF7DD0 /* AlbumViewModel.swift */,
 				296DB67326FB86E100ADA0CA /* AlbumCell.swift */,
+				CA7A918824B7D67E00419A0F /* Album.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";

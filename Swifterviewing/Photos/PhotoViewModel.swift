@@ -10,18 +10,18 @@ import Foundation
 import Combine
 
 class PhotoViewModel {
-
-    let albumId: Int
     
     var photos: [Photo] = []
     weak var delegate: ListViewModelDelegate?
     
     // MARK: - private vars
     private var bindings = Set<AnyCancellable>()
-    private var api: API = API<Photo>()
+    private var api: API = API()
     private var start = 0
     private var limit = 100
     
+    let albumId: Int
+
     init(albumId: Int){        
         self.albumId = albumId
         fetchPhotos()
@@ -29,12 +29,11 @@ class PhotoViewModel {
     
     // MARK: - helper method
     private func fetchPhotos(){
-        api.getSessionPublisher(
+        let _ = api.useSessionPub(
             .photos(albumId),
-            bindings: &bindings
+            decodeTo: [Photo].self
         ) { [weak self] in
-            let photos = $0 as [Photo]
-            self?.photos.append(contentsOf: photos)
+            self?.photos.append(contentsOf: $0)
             DispatchQueue.main.sync {
                 self?.delegate?.onUpdate()
             }

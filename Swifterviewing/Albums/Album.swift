@@ -6,7 +6,6 @@
 //  Copyright © 2020 World Wide Technology Application Services. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Album: Decodable, Hashable {

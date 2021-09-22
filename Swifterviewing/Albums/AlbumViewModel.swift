@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol ListViewModelDelegate: AnyObject {
     func onUpdate()
@@ -18,10 +19,9 @@ final class AlbumViewModel {
     var albums: [Album] = []
     weak var delegate: ListViewModelDelegate?
     
-    private var bindings = Set<AnyCancellable>()
-
     // MARK: - private vars
-    private var api: API = API<Album>()
+    private var albumsApi: API = API()
+    private var cancellables = [Int: AnyCancellable]()
     private var start = 0
     private var limit = 100
 
@@ -31,17 +31,40 @@ final class AlbumViewModel {
     
     // MARK: - helper method
     private func fetchAlbums(){
-        api.getSessionPublisher(
+        cancellables[4000] = albumsApi.useSessionPub(
             .albums(start, limit),
-            bindings: &bindings
+            decodeTo: [Album].self
         ) { [weak self] in
             self?.albums.append(contentsOf: $0)
+            self?.cancellables[4000] = nil
             DispatchQueue.main.sync {
                 self?.delegate?.onUpdate()
             }
         }
-        
     
         start += limit
     }
+            
+    func fetchThumbNail(_ id: Int, onFinish: @escaping (UIImage) -> ()){
+        cancellables[id] = albumsApi.useSessionPub(
+            .photos(id),
+            decodeTo: [Photo].self
+        ) {[weak self] in
+            guard let thumbnailUrl = $0.first?.thumbnailUrl else { return }
+            self?.cancellables[id] = self?.albumsApi
+                .fetchImage(thumbnailUrl){[weak self] image in
+                    self?.cancellables[id] = nil
+                    DispatchQueue.main.sync {
+                        onFinish(image)
+                    }
+                }
+        }
+    
+    }
+    
+    func cancelWithId(_ id: Int) {
+        cancellables[id]?.cancel()
+        cancellables[id] = nil
+    }
+    
 }

@@ -21,6 +21,7 @@ class AlbumCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .gray
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -56,8 +57,8 @@ class AlbumCell: UITableViewCell {
     }
 
     func setCell(_ album: Album){
-//        albumImageView.image = album.image
         albumLabel.text = album.title
         backgroundColor = .cyan
+        selectionStyle = .none
     }
 }

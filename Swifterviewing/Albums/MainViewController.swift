@@ -52,10 +52,14 @@ extension MainViewController {
         tableView.register(AlbumCell.self, forCellReuseIdentifier: "AlbumCell")
         datasource = UITableViewDiffableDataSource<Int, Album>(
             tableView: tableView
-        ){ (collectionView, indexPath, album) in
+        ){ [weak self] (tableView, indexPath, album) in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as? AlbumCell else { return nil }
             cell.setCell(album)
-            cell.selectionStyle = .none
+            
+            self?.albumVM.fetchThumbNail(album.id){ image in
+                cell.albumImageView.image = image
+            }
+            
             return cell
         }
     }    
@@ -77,5 +81,10 @@ extension MainViewController: UITableViewDelegate {
         albumVC.createViewModel(album.id)
         albumVC.title = album.title
         navigationController?.pushViewController(albumVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let album = albumVM.albums[indexPath.row]
+        albumVM.cancelWithId(album.id)
     }
 }

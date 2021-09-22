@@ -8,14 +8,16 @@
 
 import Foundation
 import Combine
+import UIKit
 
-struct API<T: Decodable>{
-    func getSessionPublisher(
+struct API{
+    
+    func useSessionPub<T: Decodable>(
         _ endpoint: Endpoint,
-        bindings: inout Set<AnyCancellable>,
-        closure: @escaping ([T])->()
-    ) {
-        guard let url = endpoint.getComponenets() else { return }
+        decodeTo: T.Type,
+        closure: @escaping (T)->()
+    ) -> AnyCancellable? {
+        guard let url = endpoint.getComponenets() else { return nil }
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap() { element -> Data in
@@ -25,15 +27,29 @@ struct API<T: Decodable>{
                     }
                 
                 return element.data
-            }
-            .decode(type: [T].self, decoder: JSONDecoder())
-            .replaceError(with: [])
+            }            
+            .decode(type: T.self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: { print($0) },
                 receiveValue: { closure($0) }
             )
-            .store(in: &bindings)
-        
+    }
+    
+    func fetchImage(
+        _ urlString: String,
+        closure: @escaping (UIImage)->()
+    ) -> AnyCancellable? {
+        guard let url = URL(string: urlString) else { return nil }
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .map {
+                guard let image = UIImage(data: $0.data)
+                    else { fatalError("Image couldn't be loaded :(") }
+                return image
+            }
+            .sink(receiveCompletion: { print("Image: \($0)")}) {
+                closure($0)
+            }
     }
 }
 
