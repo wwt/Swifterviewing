@@ -41,7 +41,13 @@ class ViewController: UIViewController {
       DispatchQueue.main.async() {
         self.tableView.reloadData()
       }
+      
+      await getPhotos()
     }
+  }
+  
+  private func getPhotos() async {
+    let api = API()
     
     let photoResult = await api.getUniqueAlbumPhotos()
     switch photoResult {

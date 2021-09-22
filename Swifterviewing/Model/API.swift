@@ -40,7 +40,6 @@ struct API {
     }
   }
   
-  // Private Methods
   func getUniqueAlbumPhotos() async -> Result<[AlbumPhoto], APIError> {
     guard let url = URL(string: baseURL + photosEndpoint) else {
       return .failure(.urlCreationError)
