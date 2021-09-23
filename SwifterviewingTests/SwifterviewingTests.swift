@@ -19,16 +19,26 @@ class SwifterviewingTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testAlbumWithoutE(){
+        let bundle = Bundle(for: type(of: self))
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        guard let url = bundle.url(forResource: "AlbumMock", withExtension: "json") else {
+            XCTFail("Missing file: User.json")
+            return
+        }
+        
+        do {
+            let json = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let albums = try decoder.decode([Album].self, from: json)
+            
+            XCTAssertNotEqual(albums.first?.title, "hello world")            
+            XCTAssertEqual(albums.first?.title, "hllo world")
+            XCTAssertEqual(albums.last?.title, "hallo world")
+            
+        } catch {
+            XCTFail("Error in decoding: \(error)")
         }
     }
-
+    
 }
