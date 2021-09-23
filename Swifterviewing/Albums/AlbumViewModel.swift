@@ -20,8 +20,13 @@ final class AlbumViewModel {
     weak var delegate: ListViewModelDelegate?
     
     // MARK: - private vars
+    private var cancellables = ThreadSafeDictionary(
+        dict: [Int: (
+            image: UIImage?,
+            cancellable: AnyCancellable?
+        )]()
+    )
     private var albumsApi: API = API()
-    private var cancellables = [Int: AnyCancellable]()
     private var start = 0
     private var limit = 100
 
@@ -29,14 +34,16 @@ final class AlbumViewModel {
         fetchAlbums()
     }
     
+    
     // MARK: - helper method
+    private var albumFetchCancellable: AnyCancellable?
     private func fetchAlbums(){
-        cancellables[4000] = albumsApi.useSessionPub(
+        albumFetchCancellable = albumsApi.useSessionPub(
             .albums(start, limit),
             decodeTo: [Album].self
         ) { [weak self] in
             self?.albums.append(contentsOf: $0)
-            self?.cancellables[4000] = nil
+            self?.albumFetchCancellable = nil
             DispatchQueue.main.sync {
                 self?.delegate?.onUpdate()
             }
@@ -46,25 +53,41 @@ final class AlbumViewModel {
     }
             
     func fetchThumbNail(_ id: Int, onFinish: @escaping (UIImage) -> ()){
-        cancellables[id] = albumsApi.useSessionPub(
+
+        if let image = cancellables[id]?.image {
+            onFinish(image)
+            return
+        }
+        
+        let cancellable = albumsApi.useSessionPub(
             .photos(id),
             decodeTo: [Photo].self
         ) {[weak self] in
             guard let thumbnailUrl = $0.first?.thumbnailUrl else { return }
-            self?.cancellables[id] = self?.albumsApi
+            let innerCancellable = self?.albumsApi
                 .fetchImage(thumbnailUrl){[weak self] image in
-                    self?.cancellables[id] = nil
+                    self?.cancellables[id]?.image = image
                     DispatchQueue.main.sync {
                         onFinish(image)
                     }
                 }
+            if self?.cancellables[id] == nil {
+                self?.cancellables[id] = (image: nil, cancellable: innerCancellable)
+            } else {
+                self?.cancellables[id]?.cancellable = innerCancellable
+            }
+        }
+        if cancellables[id] == nil {
+            cancellables[id] = (image: nil, cancellable: cancellable)
+        } else {
+            cancellables[id]?.cancellable = cancellable
         }
     
     }
     
     func cancelWithId(_ id: Int) {
-        cancellables[id]?.cancel()
-        cancellables[id] = nil
+        cancellables[id]?.cancellable?.cancel()
+        cancellables.removeValue(forKey: id)
     }
     
 }

@@ -30,7 +30,7 @@ struct API{
             }            
             .decode(type: T.self, decoder: JSONDecoder())
             .sink(
-                receiveCompletion: { print($0) },
+                receiveCompletion: { _ in },
                 receiveValue: { closure($0) }
             )
     }

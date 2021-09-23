@@ -15,7 +15,7 @@ class PhotoViewModel {
     weak var delegate: ListViewModelDelegate?
     
     // MARK: - private vars
-    private var bindings = Set<AnyCancellable>()
+    private var cancellables = ThreadSafeDictionary(dict: [Int: AnyCancellable]())
     private var api: API = API()
     private var start = 0
     private var limit = 100
@@ -28,12 +28,14 @@ class PhotoViewModel {
     }
     
     // MARK: - helper method
+    private var photoFetchCancellable: AnyCancellable?
     private func fetchPhotos(){
-        let _ = api.useSessionPub(
+        photoFetchCancellable = api.useSessionPub(
             .photos(albumId),
             decodeTo: [Photo].self
         ) { [weak self] in
             self?.photos.append(contentsOf: $0)
+            self?.photoFetchCancellable = nil
             DispatchQueue.main.sync {
                 self?.delegate?.onUpdate()
             }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2937B74526F9728D00EF7DD0 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937B74426F9728D00EF7DD0 /* AlbumViewModel.swift */; };
 		2937B74726F973E200EF7DD0 /* photoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937B74626F973E200EF7DD0 /* photoCell.swift */; };
+		294BDA2926FBF08400E8F083 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294BDA2826FBF08400E8F083 /* ThreadSafeDictionary.swift */; };
 		296DB66B26FB825D00ADA0CA /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DB66A26FB825D00ADA0CA /* AlbumViewController.swift */; };
 		296DB66D26FB82E500ADA0CA /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DB66C26FB82E500ADA0CA /* PhotoViewModel.swift */; };
 		296DB67226FB84B800ADA0CA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DB67126FB84B800ADA0CA /* Photo.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		2937B74426F9728D00EF7DD0 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		2937B74626F973E200EF7DD0 /* photoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCell.swift; sourceTree = "<group>"; };
+		294BDA2826FBF08400E8F083 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
 		296DB66A26FB825D00ADA0CA /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		296DB66C26FB82E500ADA0CA /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		296DB67126FB84B800ADA0CA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				CA7A916824B774F500419A0F /* MainViewController.swift */,
 				2937B74426F9728D00EF7DD0 /* AlbumViewModel.swift */,
+				294BDA2826FBF08400E8F083 /* ThreadSafeDictionary.swift */,
 				296DB67326FB86E100ADA0CA /* AlbumCell.swift */,
 				CA7A918824B7D67E00419A0F /* Album.swift */,
 			);
@@ -253,6 +256,7 @@
 			files = (
 				296DB66D26FB82E500ADA0CA /* PhotoViewModel.swift in Sources */,
 				CA7A916924B774F500419A0F /* MainViewController.swift in Sources */,
+				294BDA2926FBF08400E8F083 /* ThreadSafeDictionary.swift in Sources */,
 				2937B74726F973E200EF7DD0 /* photoCell.swift in Sources */,
 				CA7A916524B774F500419A0F /* AppDelegate.swift in Sources */,
 				296DB67626FB982400ADA0CA /* String+RemoveE.swift in Sources */,
@@ -425,13 +429,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KRX3M99K22;
+				DEVELOPMENT_TEAM = YT49N69UX5;
 				INFOPLIST_FILE = Swifterviewing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = WWTAS.Swifterviewing;
+				PRODUCT_BUNDLE_IDENTIFIER = WWTAS.Swifterviewing.Robert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -510,7 +514,7 @@
 				CA7A917F24B774F600419A0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CA7A918024B774F600419A0F /* Build configuration list for PBXNativeTarget "Swifterviewing" */ = {
 			isa = XCConfigurationList;
@@ -519,7 +523,7 @@
 				CA7A918224B774F600419A0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CA7A918324B774F600419A0F /* Build configuration list for PBXNativeTarget "SwifterviewingTests" */ = {
 			isa = XCConfigurationList;
@@ -528,7 +532,7 @@
 				CA7A918524B774F600419A0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

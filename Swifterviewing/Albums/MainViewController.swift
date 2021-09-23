@@ -36,10 +36,10 @@ extension MainViewController {
         tableView.rowHeight = 66
         let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 8),
-            tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -8),
-            tableView.topAnchor.constraint(equalTo: guide.topAnchor, constant: 8),
-            tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8)
+            tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: guide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
         ])
         
         tableView.delegate = self

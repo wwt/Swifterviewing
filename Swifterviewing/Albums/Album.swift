@@ -15,6 +15,7 @@ struct Album: Decodable, Hashable {
     
     var id: Int
     var title: String
+    var image: UIImage?
     
     init(from decoder: Decoder) throws {
         do {
