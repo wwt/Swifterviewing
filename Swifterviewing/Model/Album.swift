@@ -8,6 +8,12 @@
 
 import Foundation
 
-<#ClassOrStruct#> Album {
-    
+class Album: Codable {
+  
+  // MARK: Properties
+  var userId : Int
+  var id : Int
+  var title : String
+  
+  var thumbnailUrl : String?
 }
